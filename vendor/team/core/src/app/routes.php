@@ -16,20 +16,16 @@ Route::group(['prefix' => 'admin'], function(){
     Route::any('menu/update/{id}', 'MenuController@create');
 
     Route::any('api/table', 'ApiController@getTable');
-    Route::any('api/upload', 'ApiController@upload');
-    Route::any('api/delete/file', 'ApiController@deleteFile');
+    Route::any('api/upload', 'Api\Upload@upload');
+    Route::any('api/delete/file', 'Api\Upload@delete');
 
-    // Route::get('module', 'ModuleController@index');
-    // Route::any('module/create', 'ModuleController@create');
-    // Route::any('module/update/{id}', 'ModuleController@create');
-    // Route::any('api/module', 'ApiController@fetchingModule');
+    Route::get('module', 'ModuleController@index');
+    Route::any('module/create', 'ModuleController@create');
+    Route::any('module/update/{id}', 'ModuleController@create');
+    Route::any('api/module', 'ModuleController@fetchingForDataTable');
 
-    // Route::get('module/{path}', 'ModuleController@indexModule');
-    // Route::any('module/{path}/create', 'ModuleController@createModule');
-    // Route::any('module/{path}/update/{id}', 'ModuleController@createModule');
-    // Route::any('api/module/{path}', 'ApiController@fetchingModuleItem');
+    Route::get('module/{path}', 'ModuleController@indexModule');
+    Route::any('module/{path}/create', 'ModuleController@createModule');
+    Route::any('module/{path}/update/{id}', 'ModuleController@createModule');
+    Route::any('api/module/{path}', 'ModuleController@fetchingModuleItem');
 });
-
-Route::any('{slug}', function ($slug) {
-    return redirect(url('thong-bao.html'))->with(['message' => 'Liên kết không tồn tại']);
-})->where('slug', '([A-z\d-\/_.]+)?');

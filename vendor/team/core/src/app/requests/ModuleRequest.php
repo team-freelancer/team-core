@@ -28,7 +28,7 @@ class ModuleRequest extends FormRequest
             $valid = [
                 'name' => 'required|unique:team_modules',
                 'table_name' => 'required|unique:team_modules',
-                'field.*.name' => 'required|unique:team_elements,field_name',
+                'field.*.name' => 'required|unique:team_elements,module_id,'.$req->id,
                 'field.*.dataType' => 'required',
                 'field.*.formElement' => 'required',
             ];

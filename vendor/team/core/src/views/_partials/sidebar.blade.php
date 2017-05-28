@@ -1,6 +1,6 @@
 <ul class="sidebar-menu">
   <li class="header">MAIN NAVIGATION</li>
-  {{-- <li class="treeview team-module">
+  <li class="treeview team-module">
     <a href="#">
       <i class="fa fa-cubes"></i>
       <span>Module</span>
@@ -28,7 +28,7 @@
       </li>
       @endforeach
     </ul>
-  </li> --}}
+  </li>
   <li class="treeview team-manager">
       <a href="#">
         <i class="fa fa-users"></i>

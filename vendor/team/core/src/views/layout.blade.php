@@ -7,27 +7,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="{{ asset('vendor/admin/css/bootstrap.min.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('vendor/admin/css/AdminLTE.min.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('vendor/admin/css/dataTables.bootstrap.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('vendor/admin/css/font-awesome.min.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('vendor/admin/css/skin-red.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('vendor/admin/plugins/file-input/css/fileinput.min.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('vendor/admin/css/custom.css') }}"/>
-  <link href="{{ asset('vendor/admin/css/blue.css')}}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/bootstrap.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/AdminLTE.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/dataTables.bootstrap.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/font-awesome.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/skin-red.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('public/vendor/admin/plugins/file-input/css/fileinput.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/custom.css') }}"/>
+  <link href="{{ asset('public/vendor/admin/css/blue.css')}}" rel="stylesheet" type="text/css" />
   <!-- script -->
   <script>var baseUrl = '{{ url("admin") }}'</script>
-  <script src="{{ asset('vendor/admin/js/jquery.min.js') }}"></script>
-  <script src="{{ asset('vendor/admin/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('vendor/admin/js/dataTables.bootstrap.js') }}"></script>
-  <script src="{{ asset('vendor/admin/js/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('vendor/admin/plugins/ckeditor/ckeditor.js') }}"></script>
-  <script src="{{ asset('vendor/admin/js/config.js') }}"></script>
-  <script src="{{ asset('vendor/admin/js/app.min.js') }}"></script>
-  {{-- <script src="{{ asset('vendor/admin/js/require.js') }}"></script> --}}
-  <script src="{{ asset('vendor/admin/js/icheck.min.js') }}"></script>
-  <script src="{{ asset('vendor/admin/plugins/file-input/js/fileinput.min.js') }}"></script>
-  <script src="{{ asset('vendor/admin/js/admin.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/js/jquery.min.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/js/dataTables.bootstrap.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/plugins/ckeditor/ckeditor.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/js/config.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/js/app.min.js') }}"></script>
+  {{-- <script src="{{ asset('public/vendor/admin/js/require.js') }}"></script> --}}
+  <script src="{{ asset('public/vendor/admin/js/icheck.min.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/plugins/file-input/js/fileinput.min.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/js/core.js') }}"></script>
 
 </head>
 <body>
@@ -42,7 +42,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="{{ !empty($admin->avatar) && $admin->avatar != '[]' ? asset('storage/'.json_decode($admin->avatar)[0]->thumb) : asset('vendor/admin/img/avatar_default.jpg') }}" class="img-circle" alt="User Image" />
+              <img src="{{ !empty($admin->avatar) && $admin->avatar != '[]' ? asset(json_decode($admin->avatar)[0]->thumb) : asset('public/vendor/admin/img/avatar_default.jpg') }}" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p>{{ $admin->name }}</p>

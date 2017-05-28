@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>AdminLTE 2 | Log in</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <link href="{{ asset('vendor/admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('vendor/admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('vendor/admin/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('vendor/admin/css/blue.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/vendor//admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/vendor//admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/vendor//admin/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/vendor//admin/css/blue.css')}}" rel="stylesheet" type="text/css" />
   </head>
   <body class="login-page">
     <div class="login-box">
@@ -52,10 +52,10 @@
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 
-    <script src="{{ asset('vendor/admin/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/admin/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/vendor//admin/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/vendor//admin/js/bootstrap.min.js') }}"></script>
     <!-- iCheck -->
-    <script src="{{ asset('vendor/admin/js/icheck.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/vendor//admin/js/icheck.min.js') }}" type="text/javascript"></script>
     <script>
       $(function () {
         $('input').iCheck({

@@ -58,28 +58,47 @@ class Module extends Model
             foreach ($fields as $field) {
                 if(isset($field['is_drop'])){
                     $table->dropColumn($field['old_name']);
-                }else
-
-                $nullable = isset($field['required']) ? false : true;
-                switch($field['dataType']){
-                    case 'integer':
-                    case 'tinyInteger':
-                    case 'unsignedInteger':
-                    case 'unsignedTinyInteger':
-                        $table->$field['dataType']($field['old_name'])->default(@$field['default'])->nullable($nullable)->change();
-                        break;
-                    case 'string':
-                        $table->$field['dataType']($field['old_name'], @$field['length'])->default(@$field['default'])->nullable($nullable)->change();
-                        break;
-                    case 'boolean':
-                        $table->$field['dataType']($field['old_name'])->default(isset($field['default']) ? 1 : 0)->nullable($nullable)->change();
-                        break;
-                    default:
-                        $table->$field['dataType']($field['old_name'])->default(@$field['default'])->nullable($nullable)->change();
-                        break;
-                }
-                if($field['old_name'] != $field['name']){
-                    $table->renameColumn($field['old_name'], $field['name']);
+                }elseif(!isset($field['old_name'])){
+                    $nullable = isset($field['required']) ? false : true;
+                    switch($field['dataType']){
+                        case 'integer':
+                        case 'tinyInteger':
+                        case 'unsignedInteger':
+                        case 'unsignedTinyInteger':
+                            $table->$field['dataType']($field['name'])->default(@$field['default'])->nullable($nullable);
+                            break;
+                        case 'string':
+                            $table->$field['dataType']($field['name'], @$field['length'])->default(@$field['default'])->nullable($nullable);
+                            break;
+                        case 'boolean':
+                            $table->$field['dataType']($field['name'])->default(isset($field['default']) ? 1 : 0)->nullable($nullable);
+                            break;
+                        default:
+                            $table->$field['dataType']($field['name'])->default(@$field['default'])->nullable($nullable);
+                            break;
+                    }
+                }else{
+                    $nullable = isset($field['required']) ? false : true;
+                    switch($field['dataType']){
+                        case 'integer':
+                        case 'tinyInteger':
+                        case 'unsignedInteger':
+                        case 'unsignedTinyInteger':
+                            $table->$field['dataType']($field['old_name'])->default(@$field['default'])->nullable($nullable)->change();
+                            break;
+                        case 'string':
+                            $table->$field['dataType']($field['old_name'], @$field['length'])->default(@$field['default'])->nullable($nullable)->change();
+                            break;
+                        case 'boolean':
+                            $table->$field['dataType']($field['old_name'])->default(isset($field['default']) ? 1 : 0)->nullable($nullable)->change();
+                            break;
+                        default:
+                            $table->$field['dataType']($field['old_name'])->default(@$field['default'])->nullable($nullable)->change();
+                            break;
+                    }
+                    if($field['old_name'] != $field['name']){
+                        $table->renameColumn($field['old_name'], $field['name']);
+                    }
                 }
             }
         });

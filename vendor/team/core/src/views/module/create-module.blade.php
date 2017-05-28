@@ -39,7 +39,7 @@
                                 <label>
                                     <input type="checkbox" name="much" checked> Thêm nhiều
                                 </label>
-                            </div>  
+                            </div>
                         </div>
                         @endif
                     </div><!-- /.box-body -->

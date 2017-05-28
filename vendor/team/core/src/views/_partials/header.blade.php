@@ -200,13 +200,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{ !empty($admin->avatar) && $admin->avatar != '[]' ? asset('storage/'.json_decode($admin->avatar)[0]->thumb) : asset('vendor/admin/img/avatar_default.jpg') }}" class="user-image" alt="User Image"/>
+                  <img src="{{ !empty($admin->avatar) && $admin->avatar != '[]' ? asset(json_decode($admin->avatar)[0]->thumb) : asset('vendor/admin/img/avatar_default.jpg') }}" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">{{ $admin->name }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="{{ !empty($admin->avatar) && $admin->avatar != '[]' ? asset('storage/'.json_decode($admin->avatar)[0]->thumb) : asset('vendor/admin/img/avatar_default.jpg') }}" class="img-circle" alt="User Image" />
+                    <img src="{{ !empty($admin->avatar) && $admin->avatar != '[]' ? asset(json_decode($admin->avatar)[0]->thumb) : asset('vendor/admin/img/avatar_default.jpg') }}" class="img-circle" alt="User Image" />
                     <p>
                       {{ $admin->name }} - user.job ? user.job : 'Customer'
                       <small>Member since Nov. 2012</small>

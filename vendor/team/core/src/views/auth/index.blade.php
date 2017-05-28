@@ -69,7 +69,7 @@
             render: function(data){
                 try{
                     var data = JSON.parse(data);
-                    return '<img src="'+baseUrl + '/../storage/' + data[0].thumb+'" width="100"/>'
+                    return '<img src="'+baseUrl + '/../' + data[0].thumb+'" width="100"/>'
                 }
                 catch(e){
                     return 'No Image';

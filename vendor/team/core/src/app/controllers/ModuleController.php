@@ -7,9 +7,12 @@ use Team\Core\App\Requests\ModuleRequest;
 use Team\Core\App\Models\Module;
 use Team\Core\App\Models\Element;
 use Team\Core\App\Helpers\Helper;
+use Team\Core\App\Traits\DataTable;
 
 class ModuleController extends AdminController
 {
+    use DataTable;
+
     public function __construct(){
         parent::__construct();
     }
@@ -44,7 +47,7 @@ class ModuleController extends AdminController
             if($id){
                 if(Module::updateTable($module->table_name, $req->field)){
                     $module->save();
-                    if(Element::updateField($req->field)){
+                    if(Element::updateField($req->field, $id)){
                         return redirect(url('admin/module'))->with('message', 'Cập nhật module thành công!');
                     }
                 }
@@ -69,6 +72,11 @@ class ModuleController extends AdminController
             }
             return redirect()->back()->with('error', 'Lỗi');
         }
+    }
+
+    public function fetchingForDataTable(Request $req){
+        $module = new Module;
+        return $this->fetch($req, 'team_modules', $module, [], ['name']);
     }
 
     public function indexModule(Request $req, $path){
@@ -113,6 +121,13 @@ class ModuleController extends AdminController
             }
             return redirect(url('admin/module/'.$module->path))->with('message', (isset($action) ? $action : 'Thêm ').$module->name.' thành công!');
         }
+    }
+
+    public function fetchingModuleItem(Request $req){
+        $module = Module::select('id','table_name')->where('path', $req->path)->first();
+        $fields = Element::forFetch($module->id, $module->table_name);
+        $model = \DB::table($module->table_name)->select($fields['select']);
+        return $this->fetch($req, $module->table_name, $model, $fields['filter'], $fields['search']);
     }
 
     public function _callModel($tableName){

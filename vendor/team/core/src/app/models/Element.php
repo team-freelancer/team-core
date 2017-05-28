@@ -43,7 +43,7 @@ class Element extends Model
         return 1;
     }
 
-    public static function updateField($fields){
+    public static function updateField($fields, $moduleID){
         foreach ($fields as $field) {
             if(isset($field['is_drop'])){
                 Element::where('id', $field['id'])->delete();
@@ -63,7 +63,12 @@ class Element extends Model
                 'is_unique' => isset($field['unique']) ? 1 : 0,
                 'link' => isset($field['link']) ? $field['link'] : '',
             ];
-            Element::where('id', $field['id'])->update($data);
+            if(isset($field['id'])){
+                Element::where('id', $field['id'])->update($data);
+            }else{
+                $data['module_id'] = $moduleID;
+                Element::insert($data);
+            }
         }
         return 1;
     }
@@ -73,50 +78,53 @@ class Element extends Model
     }
 
     public static function getForDataTable($moduleID){
-        $columns = Element::select('field_name', 'field_title', 'element', 'is_search', 'is_filter', 'is_manager', 'is_hidden', 'link')->where('module_id', $moduleID)->get();
+        $columns = Element::select()->where('module_id', $moduleID)->get();
         $result = [
             'search' => [],
             'filter' => [],
             'dtColumns' => [],
             'dtElements' => [],
         ];
-        $primaryKey = null;
         foreach ($columns as $key) {
-            if($key->is_hidden){
-                if(in_array($key->element, [0, 12])){
-                    $primaryKey = $key->field_name;
-                    $result['dtColumns'][$key->field_name] = '#';
-                    $result['dtElements'][$key->field_name] = $key->element;
-                }
-            }else{
-                if($key->is_search){
-                    $result['search'][] = (object)[
-                        'field_name' => $key->field_name,
-                        'field_title' => $key->field_title,
-                    ];
-                }
-                if($key->is_filter){
-                    $db = explode('.', $key->link);
-                    $data = \DB::table($db[0])->select($db[1], $db[2])->get();
-                    $dataFilter = [];
-                    foreach ($data as $k) {
-                        $dataFilter[$k->$db[1]] = $k->$db[2];
-                    }
-                    $result['filter'][] = (object)[
-                        'field_name' => $key->field_name,
-                       'field_title' => $key->field_title,
-                       'data' => $dataFilter
-                    ];
-                }
-                if($key->is_manager){
-                    $result['dtColumns'][$key->field_name] = $key->field_title;
-                    $result['dtElements'][$key->field_name] = $key->element;
-                }
+            if($key->is_search){
+                $result['search'][] = (object)[
+                    'field_name' => $key->field_name,
+                    'field_title' => $key->field_title,
+                ];
+            }
+            if($key->is_filter){
+                
+                $result['filter'][] = (object)[
+                    'field_name' => $key->field_name,
+                    'field_title' => $key->field_title,
+                    'data' => Element::_mapSelect($key->data_type, $key->link)
+                ];
+            }
+            if($key->is_manager){
+                $result['dtColumns'][$key->field_name] = $key->field_title;
+                $result['dtElements'][$key->field_name] = $key->element;
             }
         }
-        if($primaryKey){
-            $result['dtColumns']['_'.$primaryKey] = 'Action';
-            $result['dtElements']['_'.$primaryKey] = 'action';
+        return $result;
+    }
+
+    public static function forFetch($moduleID){
+        $columns = Element::select('field_name', 'is_manager', 'is_filter', 'is_search')->where('module_id', $moduleID)->get();
+        $result = [
+            'select' => ['id'],
+            'filter' => [],
+            'search' => [],
+        ];
+        foreach ($columns as $key) {
+            if($key->is_manager){
+                $result['select'][] = $key->field_name;
+            }
+            if($key->is_filter){
+                $result['filter'][] = $key->field_name;
+            }
+            if($key->is_search){
+                $result['search'][] = $key->field_name;
+            }
         }
         return $result;
     }
@@ -160,7 +168,7 @@ class Element extends Model
                                 $checked = 'checked';
                             }
                         }
-                        $form.= '<div class="checkbox icheck"><label><input type="checkbox" name="'.$field_name.'" '.$checked.'> '.$key->field_title.'</label></div></div>';
+                        $form.= '<div class="checkbox icheck"><label><input type="checkbox" name="'.$field_name.'" '.$checked.'> '.$key->field_title.'</label></div>';
                         break;
                     case 7:
                         
@@ -175,12 +183,35 @@ class Element extends Model
                         $form .= '<input name="team_files" type="file" multiple class="file-loading team-file-upload" data='.(isset($data) ? $data->$field_name : "''").' fieldName="'.$field_name.'">';
                         break;
                     case 11:
-                        $form .= Form::select($field_name, [], old($field_name, isset($data) ? $data->$field_name : ''), ['class' => 'form-control', 'placeholder' => '---Chọn '.$key->field_title.'---']);
+                        
+                        $form .= Form::select($field_name, Element::_mapSelect($key->data_type, $key->link), old($field_name, isset($data) ? $data->$field_name : ''), ['class' => 'form-control', 'placeholder' => '---Chọn '.$key->field_title.'---']);
                         break;
                 }
                 $form.= '</div>';
             }
         }
         return $form;
+    }
+
+    protected static function _mapSelect($dataType, $link){
+        if($link){
+            $db = explode('.', $link);
+            $data = \DB::table($db[0])->select($db[1], $db[2])->get();
+            $dataFilter = [];
+            foreach ($data as $k) {
+                $dataFilter[$k->$db[1]] = $k->$db[2];
+            }
+        }
+        else{
+            switch($dataType){
+                case 'boolean':
+                    $dataFilter = [0 => 'Không kích hoạt', 1 => 'Kích hoạt'];
+                    break;
+                default:
+                    $dataFilter = [];
+                    break;
+            }
+        }
+        return $dataFilter;
     }
 }

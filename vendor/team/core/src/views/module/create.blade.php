@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label>Icon (Suppost Bootstrap or FontAwesome)</label>
-                            {!! \Form::text('icon', isset($module) ? $module->icon : '', ['class' => 'form-control', 'placeholder' => 'fa fa-example']) !!}
+                            {!! \Form::text('icon', isset($module) ? $module->icon : '', ['class' => 'form-control', 'placeholder' => 'fa fa-puzzle-piece']) !!}
                             {!! $errors->first('icon') ?'<span class="text-error">'.$errors->first('icon').'</span>' : '' !!}
                         </div>
                         <div class="form-group">
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                             @endif
-                            {{ $errors->first('table_name') ?'<span class="text-error">'.$errors->first('table_name').'</span>' : '' }}
+                            {!! $errors->first('field') ?'<span class="text-error">'.$errors->first('table_name').'</span>' : '' !!}
                         </div>
                         @if(!isset($module))
                         <div class="form-group">

@@ -37,9 +37,11 @@
             <table id="team-datatable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th>#</th>
                         @foreach($elements['dtColumns'] as $k => $v)
                             <th>{{ $v }}</th>
                         @endforeach
+                        <th>Action</th>
                     </tr>
                 </thead>
             </table>
@@ -72,20 +74,15 @@
     config.datatable.fnDrawCallback = function (oSettings) {
         
     };
-    config.datatable.columns = [];
+    config.datatable.columns = [
+        {
+            data: 'id',
+            render: function(data){
+                return '<input type="checkbox"/>';
+            }
+        }
+    ];
     for(let key in elements.dtColumns){
-        if(key.indexOf('_') == 0){
-            config.datatable.columns.push({
-                data: key.replace('_', ''),
-                render: function(data, type, row){
-                    var html = '<div class="btn-group btn-group-sm" role="group" aria-label="...">'
-                    html += '<a href="{{url("admin/module/$module->path/update")}}/'+data+'" class="btn btn-warning"><i class="fa fa-edit"></i></button>'
-                    html += '<a href="{{url("admin/module/$module->path/delete")}}/'+data+'"  class="btn btn-danger"><i class="fa fa-trash"></i></button>'
-                    html += '</div>'
-                    return html;
-                }
-            })
-        }else
         config.datatable.columns.push({
             data: key,
             render: function(data, type, full, meta){
@@ -110,6 +107,18 @@
             }
         });
     }
+    config.datatable.columns.push(
+        {
+            data: 'id',
+            render: function(data, type, row){
+                var html = '<div class="btn-group btn-group-sm" role="group" aria-label="...">'
+                html += '<a href="{{url("admin/module/$module->path/update")}}/'+data+'" class="btn btn-warning"><i class="fa fa-edit"></i></button>'
+                html += '<a href="{{url("admin/module/$module->path/delete")}}/'+data+'"  class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+                html += '</div>'
+                return html;
+            }
+        }
+    );
     var table = $('#team-datatable').DataTable(config.datatable);
     $('.filter-post').on('submit', function(e){
         e.preventDefault();
