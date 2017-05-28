@@ -1,0 +1,23 @@
+@media (max-width: 767px){
+	.slide img{
+		height: auto;
+	}
+}
+@media (min-width: 768px) and (max-width: 1199px){
+	.name-products {
+	    font-size: 20px;
+	    text-transform: uppercase;
+	    color: #3d3568;
+	    font-family: HelveB;
+	}
+	.price, .code{
+		font-size: 20px;
+	}
+	.btn-muahang{
+		margin-top: 10px;
+	}
+	.slide img{
+		height: auto;
+	}
+}
+@media (min-width: 1200px){}
