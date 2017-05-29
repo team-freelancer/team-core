@@ -133,7 +133,7 @@ class ModuleController extends AdminController
         return $this->fetch($req, $module->table_name, $model, $fields['filter'], $fields['search']);
     }
 
-    public function _callModel($tableName){
+    protected function _callModel($tableName){
         $modelName = explode('-', $tableName);
         for ($i=0; $i < count($modelName); $i++) { 
             $modelName[$i] = ucfirst($modelName[$i]);
