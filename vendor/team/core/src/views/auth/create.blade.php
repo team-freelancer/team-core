@@ -34,6 +34,10 @@
                             {!! $errors->first('name') ?'<span class="text-error">'.$errors->first('name').'</span>' : '' !!}
                         </div>
                         <div class="form-group">
+                            <label>Quyền</label>
+                            {!! \Form::select('role_id', $roles, old('role_id', isset($adminUser) ? $adminUser->role_id : ''), ['class'=>'form-control', 'placeholder'=>'---Chọn quyền---']) !!}
+                        </div>
+                        <div class="form-group">
                             <label>Email</label>
                             {!! \Form::text('email', old('email', isset($adminUser) ? $adminUser->email : ''), ['class' => 'form-control', 'placeholder' => 'Nhập email']) !!}
                             {!! $errors->first('email') ?'<span class="text-error">'.$errors->first('email').'</span>' : '' !!}

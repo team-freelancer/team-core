@@ -3,6 +3,7 @@ namespace Team\Core\App\Controllers;
 
 use Illuminate\Http\Request;
 use Team\Core\App\Controllers\AdminController;
+use Team\Core\App\Middlewares\SuperAdmin;
 use Team\Core\App\Requests\ModuleRequest;
 use Team\Core\App\Models\Module;
 use Team\Core\App\Models\Element;
@@ -15,6 +16,7 @@ class ModuleController extends AdminController
 
     public function __construct(){
         parent::__construct();
+        $this->middleware(SuperAdmin::class);
     }
 
     public function index(Request $req){

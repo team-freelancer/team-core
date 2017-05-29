@@ -27,4 +27,8 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function role(){
+        return $this->hasOne('Team\Core\App\Models\Role', 'id', 'role_id');
+    }
 }

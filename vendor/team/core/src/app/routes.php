@@ -6,6 +6,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('logout', 'Auth\LoginController@logout');
     Route::get('/', 'AdminController@index');
 
+    Route::get('role', 'RoleController@index');
+    Route::any('role/create', 'RoleController@create');
+    Route::any('role/update/{id}', 'RoleController@create');
+    Route::any('role/delete/{id}', 'RoleController@delete');
+    Route::any('api/role', 'RoleController@fetchingRole');
+
     Route::get('manager', 'Auth\ManagerController@index');
     Route::any('manager/create', 'Auth\ManagerController@create');
     Route::any('manager/update/{id}', 'Auth\ManagerController@create');
@@ -15,9 +21,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::any('menu/create', 'MenuController@create');
     Route::any('menu/update/{id}', 'MenuController@create');
 
-    Route::any('api/table', 'ApiController@getTable');
     Route::any('api/upload', 'Api\Upload@upload');
     Route::any('api/delete/file', 'Api\Upload@delete');
+    Route::any('api/module/fields', 'Api\Module@fields');
 
     Route::get('module', 'ModuleController@index');
     Route::any('module/create', 'ModuleController@create');

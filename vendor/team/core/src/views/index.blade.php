@@ -14,6 +14,7 @@
 </section>
 
 <section class="content">
+    {!! session('message') ? '<div class="alert alert-'.(session('messageType') ? session('messageType') : 'success').'">'.session('message').'</div>' : '' !!}
     @if(isset($statist))
     <div class="row">
         <?php 

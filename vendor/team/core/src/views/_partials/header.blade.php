@@ -1,6 +1,6 @@
 <header class="main-header">
         <!-- Logo -->
-        <a href="{{ url('admin') }}" class="logo"><b>Quản trị</b></a>
+        <a href="{{ url('admin') }}" class="logo"><b>Team Freelancer</b></a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -208,12 +208,12 @@
                   <li class="user-header">
                     <img src="{{ !empty($admin->avatar) && $admin->avatar != '[]' ? asset(json_decode($admin->avatar)[0]->thumb) : asset('vendor/admin/img/avatar_default.jpg') }}" class="img-circle" alt="User Image" />
                     <p>
-                      {{ $admin->name }} - user.job ? user.job : 'Customer'
+                      {{ $admin->name }}
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
                   <!-- Menu Body -->
-                  <li class="user-body">
+                  {{-- <li class="user-body">
                     <div class="col-xs-4 text-center">
                       <a href="#">Followers</a>
                     </div>
@@ -223,7 +223,7 @@
                     <div class="col-xs-4 text-center">
                       <a href="#">Friends</a>
                     </div>
-                  </li>
+                  </li> --}}
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">

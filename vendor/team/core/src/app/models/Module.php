@@ -112,4 +112,13 @@ class Module extends Model
     public static function getByPath($path){
         return Module::select('id', 'name', 'path', 'icon', 'table_name')->where('path', $path)->first();
     }
+
+    public static function getForSelect(){
+        $module = Module::select('id', 'name')->where('is_active', 1)->get();
+        $result = [];
+        foreach ($module as $key => $value) {
+            $result[$value->id] = $value->name;
+        }
+        return $result;
+    }
 }

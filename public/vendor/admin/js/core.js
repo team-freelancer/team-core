@@ -144,4 +144,21 @@ $(function () {
             $(document).find('[name="field['+fieldNumb+'][link]"]').remove();
         }
     });
+
+    $(document).on('ifChecked', '.check-all-crud', function(){
+        $(this).parent().parent().parent().find('[type=checkbox]').prop('checked',true).iCheck('update');
+    });
+    $(document).on('ifUnchecked', '.check-all-crud', function(){
+        $(this).parent().parent().parent().find('[type=checkbox]').prop('checked',false).iCheck('update');
+    });
+
+    $(document).on('ifChecked', '.check-column', function(){
+        var cl = $(this).attr('id');
+        $('.'+cl).prop('checked',true).iCheck('update');
+    });
+    $(document).on('ifUnchecked', '.check-column', function(){
+        var cl = $(this).attr('id');
+        $('.'+cl).prop('checked',false).iCheck('update');
+    });
+    
 });

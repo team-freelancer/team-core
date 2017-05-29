@@ -1,5 +1,6 @@
 <ul class="sidebar-menu">
-  <li class="header">MAIN NAVIGATION</li>
+  @if($admin->role->super_admin)
+  <li class="header">SUPER ADMIN</li>
   <li class="treeview team-module">
     <a href="#">
       <i class="fa fa-cubes"></i>
@@ -11,6 +12,30 @@
       <li><a href="{{ url('admin/module/create') }}"><i class="fa fa-plus-square text-danger"></i> Thêm</a></li>
     </ul>
   </li>
+  <li class="treeview team-role">
+      <a href="#">
+        <i class="fa fa-key"></i>
+        <span>Quyền</span>
+        <span class="label label-primary pull-right"></span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="{{ url('admin/role') }}"><i class="fa fa-list text-danger"></i> Danh sách</a></li>
+        <li><a href="{{ url('admin/role/create') }}"><i class="fa fa-plus-square text-danger"></i> Thêm</a></li>
+      </ul>
+  </li>
+  <li class="treeview team-manager">
+      <a href="#">
+        <i class="fa fa-users"></i>
+        <span>Admin</span>
+        <span class="label label-primary pull-right"></span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="{{ url('admin/manager') }}"><i class="fa fa-list text-danger"></i> Danh sách</a></li>
+        <li><a href="{{ url('admin/manager/create') }}"><i class="fa fa-plus-square text-danger"></i> Thêm</a></li>
+      </ul>
+  </li>
+  @endif
+  <li class="header">ADMIN NORMAL</li>
   <li class="treeview team-module-item">
     <a href="#">
       <i class="fa fa-tasks"></i>
@@ -29,17 +54,6 @@
       @endforeach
     </ul>
   </li>
-  <li class="treeview team-manager">
-      <a href="#">
-        <i class="fa fa-users"></i>
-        <span>Admin</span>
-        <span class="label label-primary pull-right"></span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="{{ url('admin/manager') }}"><i class="fa fa-list text-danger"></i> Danh sách</a></li>
-        <li><a href="{{ url('admin/manager/create') }}"><i class="fa fa-plus-square text-danger"></i> Thêm</a></li>
-      </ul>
-    </li>
     @includeIf('admin._partials.sidebar')
 </ul>
 <script>
