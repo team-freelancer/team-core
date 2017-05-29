@@ -14,7 +14,28 @@
 </section>
 
 <section class="content">
-    Content
+    @if(isset($statist))
+    <div class="row">
+        <?php 
+            $bg = ['aqua', 'green', 'yellow', 'red'];
+        ?>
+        @foreach($statist as $name => $data)
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-{{$bg[rand(0, 3)]}}">
+                <div class="inner">
+                    <h3>{{$data['count']}}</h3>
+                    <p>{{$name}}</p>
+                </div>
+                <div class="icon">
+                    <i class="{{$data['icon']}}"></i>
+                </div>
+                <a href="{{url($data['path'])}}" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div><!-- ./col -->
+        @endforeach
+    </div>
+    @endif
 </section>
 
 @endsection

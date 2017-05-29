@@ -96,7 +96,7 @@ $(function () {
         input.val(JSON.stringify(defaultData));
         var result = input.val() == '' ? [] : JSON.parse(input.val());
         for (var i = 0; i < defaultData.length; i ++) {
-            initialPreview.push(baseUrl + '/../storage/' + defaultData[i].largest);
+            initialPreview.push(baseUrl + '/../' + defaultData[i].largest);
             initialPreviewConfig.push({
                 caption : defaultData[i].largest,
                 url : baseUrl + '/api/delete/file',

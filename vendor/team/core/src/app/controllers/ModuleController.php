@@ -103,6 +103,7 @@ class ModuleController extends AdminController
         }
         if($req->isMethod('post')){
             if($id){
+                $action = 'Sửa';
                 $model = $this->_callModel($module->table_name)->find($id);
             }else{
                 $model = $this->_callModel($module->table_name);
@@ -137,5 +138,11 @@ class ModuleController extends AdminController
         }
         $modelName = 'App\Models\Front\\'.implode('', $modelName);
         return new $modelName;
+    }
+
+    public function deleteModule(Request $req){
+        $module = Module::select('name', 'table_name')->where('path', $req->path)->first();
+        \DB::table($module->table_name)->where('id', $req->id)->delete();
+        return redirect(url('admin/module/'.$req->path))->with('message', 'Xóa '.$module->name.' thành công!');
     }
 }

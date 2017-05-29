@@ -27,5 +27,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('module/{path}', 'ModuleController@indexModule');
     Route::any('module/{path}/create', 'ModuleController@createModule');
     Route::any('module/{path}/update/{id}', 'ModuleController@createModule');
+    Route::any('module/{path}/delete/{id}', 'ModuleController@deleteModule');
     Route::any('api/module/{path}', 'ModuleController@fetchingModuleItem');
 });

@@ -15,6 +15,21 @@ class AdminController extends \App\Http\Controllers\Controller
     }
 
     public function index(Request $req){
-        return view('admin::index');
+        $module = Module::select('name', 'table_name', 'icon', 'path');
+        $statist = [
+            'Module' => [
+                'icon' => 'fa fa-cubes',
+                'count' => $module->count(),
+                'path' => 'admin/module'
+            ]
+        ];
+        foreach ($module->get() as $key) {
+            $statist[$key->name] = [
+                'icon' => $key->icon,
+                'count' => \DB::table($key->table_name)->select('COUNT(1)')->count(),
+                'path' => 'admin/module/'.$key->path
+            ];
+        }
+        return view('admin::index', compact('statist'));
     }
 }

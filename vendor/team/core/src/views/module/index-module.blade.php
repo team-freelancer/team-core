@@ -51,7 +51,6 @@
 
 <script type="text/javascript">
     var elements = JSON.parse('{{json_encode($elements)}}'.replace(/&quot;/g, '"'));
-    console.log(elements);
     config.datatable.serverSide = true;
     config.datatable.deferRender = true;
     config.datatable.ajax = {
@@ -86,11 +85,15 @@
         config.datatable.columns.push({
             data: key,
             render: function(data, type, full, meta){
+                for(let i = 0; i < elements.filter.length; i++){
+                    if(key == elements.filter[i].field_name){
+                        if(elements.filter[i].data[data]){
+                            return elements.filter[i].data[data];
+                        }
+                    }
+                }
                 switch(elements.dtElements[key]){
                     case 0:
-                        if(elements.dtColumns[key] == '#'){
-                            return '<input type="checkbox"/>'
-                        }
                         return data;
                         break;
                     case 6:
@@ -98,7 +101,7 @@
                         break;
                     case 9:
                     case 10:
-                        return '<img width="100" src="'+baseUrl+'/../storage/'+JSON.parse(data)[0].thumb+'"/>';
+                        return '<img width="100" src="'+baseUrl+'/../'+JSON.parse(data)[0].thumb+'"/>';
                         break;
                     default:
                         return data;
