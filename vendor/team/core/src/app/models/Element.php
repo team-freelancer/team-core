@@ -174,16 +174,18 @@ class Element extends Model
                         
                         break;
                     case 8:
-                        
+                        $form.= Form::text($field_name, old($field_name, isset($data) ? $data->$field_name : ''), ['class' => 'form-control team-datetimepicker', 'placeholder' => 'Nhập '.$key->field_title]);
                         break;
                     case 9:
-                        $form .= '<input name="team_files" type="file" class="file-loading team-file-upload" data='.(isset($data) ? $data->$field_name : "''").' fieldName="'.$field_name.'">';
+                        $form.= Form::text($field_name, old($field_name, isset($data) ? $data->$field_name : ''), ['class' => 'form-control team-datetimepicker', 'placeholder' => 'Nhập '.$key->field_title, 'timepicker' => false]);
                         break;
                     case 10:
-                        $form .= '<input name="team_files" type="file" multiple class="file-loading team-file-upload" data='.(isset($data) ? $data->$field_name : "''").' fieldName="'.$field_name.'">';
+                        $form .= '<input name="team_files" type="file" class="file-loading team-file-upload" data='.(@$data->$field_name ? $data->$field_name : '""').' fieldName="'.$field_name.'">';
                         break;
                     case 11:
-                        
+                        $form .= '<input name="team_files" type="file" multiple class="file-loading team-file-upload" data='.(@$data->$field_name ? $data->$field_name : '""').' fieldName="'.$field_name.'">';
+                        break;
+                    case 12:
                         $form .= Form::select($field_name, Element::_mapSelect($key->data_type, $key->link), old($field_name, isset($data) ? $data->$field_name : ''), ['class' => 'form-control', 'placeholder' => '---Chọn '.$key->field_title.'---']);
                         break;
                 }

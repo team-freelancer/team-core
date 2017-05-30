@@ -37,6 +37,9 @@ class Module extends Model
                     case 'boolean':
                         $table->$field['dataType']($field['name'])->default(isset($field['default']) ? 1 : 0)->nullable($nullable);
                         break;
+                    case 'timestamp':
+                        $table->timestamp($field['name'])->default(isset($field['default']) ? $field['default'] : \Carbon\Carbon::now());
+                        break;
                     default:
                         $table->$field['dataType']($field['name'])->default(@$field['default'])->nullable($nullable);
                         break;
@@ -73,6 +76,9 @@ class Module extends Model
                         case 'boolean':
                             $table->$field['dataType']($field['name'])->default(isset($field['default']) ? 1 : 0)->nullable($nullable);
                             break;
+                        case 'timestamp':
+                            $table->timestamp($field['name'])->default(isset($field['default']) ? $field['default'] : \Carbon\Carbon::now());
+                            break;
                         default:
                             $table->$field['dataType']($field['name'])->default(@$field['default'])->nullable($nullable);
                             break;
@@ -91,6 +97,9 @@ class Module extends Model
                             break;
                         case 'boolean':
                             $table->$field['dataType']($field['old_name'])->default(isset($field['default']) ? 1 : 0)->nullable($nullable)->change();
+                            break;
+                        case 'timestamp':
+                            $table->timestamp($field['name'])->default(isset($field['default']) ? $field['default'] : \Carbon\Carbon::now())->change();
                             break;
                         default:
                             $table->$field['dataType']($field['old_name'])->default(@$field['default'])->nullable($nullable)->change();

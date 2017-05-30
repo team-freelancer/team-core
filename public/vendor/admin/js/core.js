@@ -136,7 +136,13 @@ $(function () {
             input.val(JSON.stringify(result));
         });
     });
-
+    $('.team-datetimepicker').each(function(){
+        $(this).datetimepicker({
+            format: $(this).attr('timepicker') == false ? 'Y-m-d' : 'Y-m-d H:i:s',
+            timepicker: $(this).attr('timepicker'),
+            lang:'vi'
+        });
+    });
     $(document).on('change', '.select-formElement', function(){
         if($(this).val() == 11){
             $(' <input type="text" class="form-control" name="field['+fieldNumb+'][link]" placeholder="table.key.value"/> ').insertAfter($(this));

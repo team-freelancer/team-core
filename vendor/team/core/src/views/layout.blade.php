@@ -6,13 +6,14 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="{{ asset('public/favicon.ico') }}">
   <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/bootstrap.min.css') }}"/>
   <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/AdminLTE.min.css') }}"/>
   <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/dataTables.bootstrap.css') }}"/>
   <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/font-awesome.min.css') }}"/>
   <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/skin-red.css') }}"/>
   <link rel="stylesheet" href="{{ asset('public/vendor/admin/plugins/file-input/css/fileinput.min.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('public/vendor/admin/plugins/datetimepicker/jquery.datetimepicker.min.css') }}"/>
   <link rel="stylesheet" href="{{ asset('public/vendor/admin/css/custom.css') }}"/>
   <link href="{{ asset('public/vendor/admin/css/blue.css')}}" rel="stylesheet" type="text/css" />
   <!-- script -->
@@ -27,6 +28,7 @@
   {{-- <script src="{{ asset('public/vendor/admin/js/require.js') }}"></script> --}}
   <script src="{{ asset('public/vendor/admin/js/icheck.min.js') }}"></script>
   <script src="{{ asset('public/vendor/admin/plugins/file-input/js/fileinput.min.js') }}"></script>
+  <script src="{{ asset('public/vendor/admin/plugins/datetimepicker/jquery.datetimepicker.full.min.js') }}"></script>
   <script src="{{ asset('public/vendor/admin/js/core.js') }}"></script>
 
 </head>

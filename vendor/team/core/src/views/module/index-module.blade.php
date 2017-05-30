@@ -85,14 +85,16 @@
         config.datatable.columns.push({
             data: key,
             render: function(data, type, full, meta){
-                for(let i = 0; i < elements.filter.length; i++){
-                    if(key == elements.filter[i].field_name){
-                        if(elements.filter[i].data[data]){
-                            return elements.filter[i].data[data];
+                if(elements.dtElements[key] != 6){
+                    for(let i = 0; i < elements.filter.length; i++){
+                        if(key == elements.filter[i].field_name){
+                            if(elements.filter[i].data[data]){
+                                return elements.filter[i].data[data];
+                            }
                         }
                     }
                 }
-                switch(elements.dtElements[key]){
+                switch(parseInt(elements.dtElements[key])){
                     case 0:
                         return data;
                         break;
@@ -100,7 +102,7 @@
                         return data == 1 ? '<span class="fa fa-check-circle-o text-success"></span>' : '<span class="fa fa-ban text-danger"></span>';
                         break;
                     case 9:
-                    case 10:
+                    case 11:
                         return '<img width="100" src="'+baseUrl+'/../'+JSON.parse(data)[0].thumb+'"/>';
                         break;
                     default:

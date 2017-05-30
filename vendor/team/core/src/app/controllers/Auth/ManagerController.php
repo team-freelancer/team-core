@@ -31,7 +31,7 @@ class ManagerController extends AdminController
                 return redirect(url('admin'))->with(['message' => 'Tài khoản không đủ quyền truy cập', 'messageType' => 'danger']);
             }
         }else{
-            if($id != Auth::guard('admin')->user()->id){
+            if(!Auth::guard('admin')->user()->role->super_admin && $id != Auth::guard('admin')->user()->id){
                 return redirect(url('admin'))->with(['message' => 'Tài khoản không đủ quyền truy cập', 'messageType' => 'danger']);
             }
         }

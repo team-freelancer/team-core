@@ -35,19 +35,22 @@ class Upload{
             $file = $req->file('team_files');
             $fileExt = $file->getClientOriginalExtension();
             $fileName = time().'.'.$fileExt;
-            $file->move($this->imagesDir, $fileName);
-            $_image->make($this->imagesDir.'/'.$fileName,array(
-                'width' => config('admin.image.thumb.width'),
-                'height' => config('admin.image.thumb.height'),
-                'greyscale' => true
-            ))->save($this->thumbsDir.'/thumb-'.$fileName);
-            $initialPreview[] = url('public/'.$this->thumbSrc.'/thumb-'.$fileName);
-            $initialPreviewConfig[] = [
-                'caption' => $fileName,
-                'url' => url('admin/api/delete/file'),
-                'key' => "{'largest': 'public/$this->imageSrc/$fileName', 'thumb': 'public/$this->thumbSrc/thumb-$fileName'}",
-                'append' => true
-            ];
+            try{
+                $file->move($this->imagesDir, $fileName);
+                $_image->make($this->imagesDir.'/'.$fileName,array(
+                    'width' => config('admin.image.thumb.width'),
+                    'height' => config('admin.image.thumb.height'),
+                    'greyscale' => true
+                ))->save($this->thumbsDir.'/thumb-'.$fileName);
+                $initialPreview[] = url('public/'.$this->thumbSrc.'/thumb-'.$fileName);
+                $initialPreviewConfig[] = [
+                    'caption' => $fileName,
+                    'url' => url('admin/api/delete/file'),
+                    'key' => "{'largest': 'public/$this->imageSrc/$fileName', 'thumb': 'public/$this->thumbSrc/thumb-$fileName'}",
+                    'append' => true
+                ];
+            }
+            catch(\Exception $e){}
         }
         
         return response()->json([

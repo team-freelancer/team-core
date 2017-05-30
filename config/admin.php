@@ -79,6 +79,7 @@ return [
             'checkbox',
             'radio',
             'datetimepicker',
+            'datepicker',
             'file upload single',
             'file upload multiple',
             'select',
