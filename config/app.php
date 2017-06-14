@@ -178,7 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Team\Core\CoreServiceProvider::class,
+        Haidangdev\Core\CoreServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,

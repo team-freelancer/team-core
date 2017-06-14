@@ -27,7 +27,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Team\\Core\\": "vendor/team/core"
+            "Haidangdev\\Core\\": "vendor/haidangdev/core"
         }
     },
     "autoload-dev": {
