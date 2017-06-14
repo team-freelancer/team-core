@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminTable extends Migration
+class CreateRoleMappersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateAdminTable extends Migration
      */
     public function up()
     {
-        Schema::create('team_admins', function (Blueprint $table) {
+        Schema::create('team_role_mappers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('module_id')->length(11);
             $table->integer('role_id')->length(11);
-            $table->string('name', 50);
-            $table->string('email', 100)->unique();
-            $table->string('password', 60);
-            $table->rememberToken();
-            $table->boolean('active')->default(1);
-            $table->timestamps();
+            $table->boolean('is_view')->default(0);
+            $table->boolean('is_create')->default(0);
+            $table->boolean('is_update')->default(0);
+            $table->boolean('is_delete')->default(0);
+            $table->text('fields');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateAdminTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        //
     }
 }

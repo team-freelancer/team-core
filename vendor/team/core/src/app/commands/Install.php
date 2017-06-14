@@ -32,8 +32,9 @@ class Install extends Command
 			]);
 			$this->info('Seeding database...');
 			$this->call('db:seed');
-			// $this->call('config:cache');
-			// $this->call('optimize');
+			$this->call('cache:clear');
+			$this->call('config:cache');
+			$this->call('optimize');
 			$this->info('Install Admin Is Done !');
 		}else{
 			$this->info('Please setting the database configuration for first !');
